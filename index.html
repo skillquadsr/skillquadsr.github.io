@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Agile perceptive multi-skill locomotion for quadrupedal robots in the wild">
+  <meta name="keywords" content="Robotics, Quadruped, Locomotion, Multi-skill">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Agile perceptive multi-skill locomotion for quadrupedal robots in the wild
+  </title>
+
+  <link rel="apple-touch-icon" sizes="57x57"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180"
+    href="//www-media.stanford.edu/assets/favicon/apple-touch-icon-180x180.png" />
+
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-196x196.png"
+    sizes="196x196" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-192x192.png"
+    sizes="192x192" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-128.png" sizes="128x128" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="//www-media.stanford.edu/assets/favicon/favicon-16x16.png" sizes="16x16" />
+
+  <link rel="mask-icon" href="//www-media.stanford.edu/assets/favicon/safari-pinned-tab.svg" color="#ffffff">
+  <meta name="application-name" content="Stanford University" />
+  <meta name="msapplication-TileColor" content="#FFFFFF" />
+  <meta name="msapplication-TileImage" content="//www-media.stanford.edu/assets/favicon/mstile-144x144.png" />
+  <meta name="msapplication-square70x70logo" content="//www-media.stanford.edu/assets/favicon/mstile-70x70.png" />
+  <meta name="msapplication-square150x150logo" content="//www-media.stanford.edu/assets/favicon/mstile-150x150.png" />
+  <meta name="msapplication-square310x310logo" content="//www-media.stanford.edu/assets/favicon/mstile-310x310.png" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ38WT2YPD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-QZ38WT2YPD');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://kit.fontawesome.com/19914a84eb.js" crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<section class="hero is-link is-fullheight video" style="overflow: hidden; position:relative;">
+  <div class="hero-video" style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
+    <video playsinline autoplay muted loop>
+      <source src=" ./static/videos/teaser-small.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-video is-hidden-tablet is-inline-block-mobile"
+    style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
+    <video playsinline autoplay muted loop>
+      <source src=" ./static/videos/teaser-mobile-small.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="overlay"></div>
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head is-hidden-mobile">
+    <header class="navbar">
+      <div class="container is-size-5">
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item pl-4 pr-4" href="#">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/pdf.svg" alt="PDF" />
+              </span>
+              <span>Paper</span>
+            </a>
+            <a class="navbar-item  pl-4 pr-4" href="#">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/arxiv.svg" alt="ArXiv" />
+              </span>
+              <span>arXiv</span> </a>
+            <a href="#video" class="navbar-item  pl-4 pr-4">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/youtube.svg" alt="Youtube" />
+              </span>
+              <span>Video</span> </a>
+            <span class="navbar-item  pl-4 pr-4">
+              <a href="https://github.com/skillquadsr" class="button is-inverted is-large">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title is-size-4-mobile" style="font-size: 5rem;">
+        Agile perceptive multi-skill locomotion for quadrupedal robots in the wild
+      </h1>
+      <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 2rem; opacity: 80%;">
+        <em>Science Robotics</em>, July 2026
+      </h1>
+      <div class="column has-text-centered is-hidden-tablet">
+        <div class="publication-links">
+          <!-- PDF Link. -->
+          <span class="link-block">
+            <a href="#" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/pdf.svg" alt="PDF" />
+              </span>
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="#" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/arxiv.svg" alt="ArXiv" />
+              </span>
+              <span>arXiv</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="#video" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/youtube.svg" alt="Youtube" />
+              </span>
+              <span>Video</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://github.com/skillquadsr"
+              class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <span>Code</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot is-hidden-mobile">
+    <nav class="tabs is-boxed is-fullwidth is-size-5">
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#pipeline">APT-RL Pipeline</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#gait-selection">Gait Selection</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+
+
+
+<section class="section is-medium" id="overview">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-justified is-hidden-mobile">
+        <h2 class="subtitle">
+          Enabling quadrupedal robots to traverse complex terrains—from rugged outdoor environments to urban
+          landscapes—requires seamless integration of multiple motor skills, smooth transitions between gaits,
+          and high-speed perceptive locomotion using only onboard sensors.
+        </h2>
+        <br>
+        <h2 class="subtitle">
+          We present <strong>APT-RL</strong> (Action Pretrained Transformer-based Reinforcement Learning), a unified
+          framework that enables multi-skill locomotion to achieve high-speed traversal in complex environments through
+          autonomous skill transitions utilizing only onboard perception and computation.
+        </h2>
+        <br>
+        <h2 class="subtitle">
+          Real-world experiments demonstrate that KAIST HOUND performs agile maneuvers through complex indoor obstacles
+          and outdoor wild environments, reaching instantaneous peak speeds of up to <strong>6 m/s</strong> while
+          traversing stairs, hurdles, stepping stones, gaps, and fallen branches.
+        </h2>
+      </div>
+
+      <div class="column is-four-fifths is-hidden-tablet has-text-justified-mobile">
+        <p>
+          Enabling quadrupedal robots to traverse complex terrains—from rugged outdoor environments to urban
+          landscapes—requires seamless integration of multiple motor skills, smooth transitions between gaits,
+          and high-speed perceptive locomotion using only onboard sensors.
+        </p>
+        <br>
+        <p>
+          We present <strong>APT-RL</strong> (Action Pretrained Transformer-based Reinforcement Learning), a unified
+          framework that enables multi-skill locomotion to achieve high-speed traversal in complex environments through
+          autonomous skill transitions utilizing only onboard perception and computation.
+        </p>
+        <br>
+        <p>
+          Real-world experiments demonstrate that KAIST HOUND performs agile maneuvers through complex indoor obstacles
+          and outdoor wild environments, reaching instantaneous peak speeds of up to <strong>6 m/s</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="video">
+  <div class="container is-max-desktop">
+    <h2 class="title is-1 has-text-centered is-size-4-mobile">Summary Video</h2>
+    <iframe width="100%" style="aspect-ratio: 16 / 9;" src="
+      https://www.youtube.com/embed/4Bp0q3xHTxE?si=ocAPm8KVAz-RZK59" title="APT-RL Summary Video"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+</section>
+
+<section class="section is-small" id="pipeline">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+
+        <h2 class="title is-1 has-text-centered is-size-4-mobile">APT-RL Pipeline</h2>
+        <div class="content">
+          <p>
+            Our approach generates large-scale, feature-rich 2D motion datasets through trajectory optimization
+            with simplified dynamics (Single Rigid Body Dynamics). This produces 180,000 trajectories spanning
+            15.5 hours of motion data in just 8 minutes.
+          </p>
+        </div>
+
+        <div class="content">
+          <p>
+            APT-RL consists of three integrated phases:
+          </p>
+          <ol>
+            <li><strong>Representation Learning</strong> — A Transformer-based VAE (TVAE) learns a unified latent
+              space from TO-generated trotting and bounding motion data, with gait-specific torque decoders trained
+              via supervised learning.</li>
+            <li><strong>Reinforcement Learning</strong> — A policy learns to select latent actions decoded into
+              joint torques, combined with an auxiliary action for adaptation to complex 3D terrains unseen during
+              pretraining.</li>
+            <li><strong>Perceptual Distillation</strong> — A student encoder trained on depth camera images and 2D
+              LiDAR data mimics a privileged teacher encoder, enabling zero-shot sim-to-real deployment.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<video autoplay muted loop playsinline width="100%">
+  <source src="./static/videos/umi-grid-small.mp4" type="video/mp4">
+</video>
+
+
+<section class="section is-large" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column has-text-justified is-four-fifths  is-hidden-mobile">
+        <h2 class="subtitle">
+          Our controller enables KAIST HOUND to autonomously select between trotting and bounding gaits based on
+          terrain geometry, proprioceptive state, and commanded velocity — achieving agile traversal across
+          unstructured outdoor environments.
+        </h2>
+      </div>
+      <div class="column has-text-justified is-four-fifths is-hidden-tablet">
+        <p>
+          Our controller enables KAIST HOUND to autonomously select between trotting and bounding gaits based on
+          terrain geometry, proprioceptive state, and commanded velocity — achieving agile traversal across
+          unstructured outdoor environments.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-small has-background-black has-text-light" id="gait-selection">
+  <div class="container is-max-desktop">
+
+    <h2 class="title is-1 has-text-white  is-size-4-mobile">Adaptive Skill Selection in the Wild</h2>
+    <div class="content has-text-justified">
+      <p>
+        In a 1.1 km urban campus traversal, the robot adapted its gait in response to terrain characteristics
+        and commanded velocity — using trotting at lower speeds and bounding to descend stairs at 4.3 m/s,
+        reaching instantaneous peak speeds of up to 6 m/s.
+      </p>
+    </div>
+
+    <div class="content has-text-justified">
+      <p>
+        In a 0.34 km wild forest traversal, the robot autonomously selected between trotting and bounding to
+        navigate fallen trees, exposed roots, uneven logs, and slippery leaf-covered ground using only onboard
+        LiDAR and a depth camera.
+      </p>
+    </div>
+  </div>
+</section>
+
+<video autoplay muted loop playsinline height="100%">
+  <source src="./static/videos/sim-small.mp4" type="video/mp4">
+</video>
+
+
+
+<section class="section is-small" id="aptrl-details">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths is-centered">
+        <h2 class="title is-3 has-text-centered is-size-5-mobile">From 2D Trajectories to 3D Agile Locomotion
+        </h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Our key insight lies in generating large-scale, feature-rich <b>2D motion datasets</b> through trajectory
+            optimization with simplified dynamics (SRBD), while keeping data generation affordable —
+            180,000 trajectories in just 8 minutes.
+          </p>
+        </div>
+
+        <video autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/stable-tracking-small.mp4" type="video/mp4">
+        </video>
+
+        <div class="content has-text-justified">
+          <p>
+            <b>Representation Learning</b>
+            A Transformer-based VAE encodes trotting and bounding motion sequences into a unified latent space.
+            Gait-specific torque decoders are trained via supervised learning, acquiring reusable action priors
+            without any RL-based representation learning or online trajectory optimization.
+          </p>
+        </div>
+
+        <video autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/wbc-precision-small.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-justified">
+          <p>
+            <b>Auxiliary Action</b>
+            The RL policy jointly learns a latent action (decoded to torques via the pretrained decoder) and an
+            auxiliary action (applied through a PD controller). This enables the policy to generate novel 3D
+            motions beyond the coverage of the 2D pretraining dataset — including dynamic jumping, leg-fracture
+            recovery, and in-place yaw rotation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section is-small" id="robot">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-1 has-text-centered is-size-4-mobile">KAIST HOUND</h2>
+        <div class="content">
+          <p>
+            We deploy APT-RL on <strong>KAIST HOUND</strong>, an in-house quadruped robot designed for fast and
+            efficient locomotion. The robot is equipped with a D435 depth camera and a 2D LiDAR sensor for
+            onboard perception, running all computation onboard.
+          </p>
+        </div>
+
+        <div class="content">
+          <p>
+            To handle high-impact locomotion at speeds exceeding 4 m/s, we designed custom 3D-printed mechanical
+            vibration absorbers mounted between the robot head and the LiDAR sensor, reducing impact loads that
+            would otherwise exceed 10 g and cause sensor malfunctions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="box pt-6 pb-6">
+      <div class="columns is-max-desktop is-centered ">
+        <div class="column is-four-fifths is-centered">
+          <h2 class="title is-2 has-text-centered is-size-5-mobile">Try APT-RL!</h2>
+          <video autoplay muted loop playsinline width="100%">
+            <source src="./static/videos/failures-small.mp4" type="video/mp4">
+          </video>
+          <div class="content">
+            Code and data for APT-RL are available. The data and figure generation code have been
+            deposited in the Zenodo database.
+          </div>
+          <div class="has-text-centered">
+            <a href="https://github.com/skillquadsr">
+              <button class="button is-primary">View Code</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section is-small" id="team">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 is-size-4-mobile">Authors</h2>
+    <div class="container has-text-centered">
+      <div class="publication-authors">
+        <p class="is-size-5">
+          Jun-Gill Kang<sup>†,1,2</sup>,&nbsp;
+          Jaehyun Park<sup>†,2</sup>,&nbsp;
+          Tae-Gyu Song<sup>2</sup>,&nbsp;
+          Joon-Ha Kim<sup>2,3</sup>,&nbsp;
+          Seungwoo Hong<sup>4,5,*,‡</sup>,&nbsp;
+          Hae-Won Park<sup>2,*,‡</sup>
+        </p>
+        <br>
+        <p>
+          <sup>1</sup>Agency for Defense Development, Daejeon, Republic of Korea&nbsp;&nbsp;
+          <sup>2</sup>KAIST, Department of Mechanical Engineering, Daejeon, Republic of Korea&nbsp;&nbsp;
+          <sup>3</sup>DIDEN Robotics, Seoul, Republic of Korea&nbsp;&nbsp;
+          <sup>4</sup>School of Mechanical Engineering, Korea University, Seoul, Republic of Korea&nbsp;&nbsp;
+          <sup>5</sup>School of Smart Mobility, Korea University, Seoul, Republic of Korea
+        </p>
+        <br>
+        <p>
+          <sup>†</sup>Equal contribution (first authors)&nbsp;&nbsp;
+          <sup>‡</sup>Equal contribution (corresponding authors)&nbsp;&nbsp;
+          <sup>*</sup>Corresponding: haewonpark@kaist.ac.kr; seungwoohong@korea.ac.kr
+        </p>
+      </div>
+    </div>
+    <br>
+    <pre class="is-hidden-mobile"><code>@article{kang2026aptrl,
+  title={Agile perceptive multi-skill locomotion for quadrupedal robots in the wild},
+  author={Kang, Jun-Gill and Park, Jaehyun and Song, Tae-Gyu and Kim, Joon-Ha and Hong, Seungwoo and Park, Hae-Won},
+  journal={Science Robotics},
+  year={2026},
+}</code></pre>
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a>.
+          </p>
+          <p>
+            This website is licensed under a <a rel="license"
+              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+</html>

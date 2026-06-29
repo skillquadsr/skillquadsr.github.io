@@ -1,1 +1,0 @@
-# skillquadsr.github.io

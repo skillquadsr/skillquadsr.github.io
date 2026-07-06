@@ -163,40 +163,39 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified is-hidden-mobile">
         <h2 class="subtitle">
-          Enabling quadrupedal robots to traverse complex terrains—from rugged outdoor environments to urban
-          landscapes—requires seamless integration of multiple motor skills, smooth transitions between gaits,
-          and high-speed perceptive locomotion using only onboard sensors.
+          Animals fluidly switch between gaits — trotting on rough ground, bounding over obstacles — picking the
+          right skill for the terrain ahead. Robots, so far, have not.
         </h2>
         <br>
         <h2 class="subtitle">
-          We present <strong>APT-RL</strong> (Action Pretrained Transformer-based Reinforcement Learning), a unified
-          framework that enables multi-skill locomotion to achieve high-speed traversal in complex environments through
-          autonomous skill transitions utilizing only onboard perception and computation.
+          <strong>APT-RL</strong> (Action Pretrained Transformer-based Reinforcement Learning) closes this gap.
+          One onboard policy lets a quadruped robot see the terrain coming, choose the right gait and motor skill
+          on its own, and transition between them smoothly — at high speed, with no external sensors or computation.
         </h2>
         <br>
         <h2 class="subtitle">
-          Real-world experiments demonstrate that KAIST HOUND performs agile maneuvers through complex indoor obstacles
-          and outdoor wild environments, reaching instantaneous peak speeds of up to <strong>6 m/s</strong> while
-          traversing stairs, hurdles, stepping stones, gaps, and fallen branches.
+          The result: KAIST HOUND jumps a 60 cm box at <strong>4.25 m/s</strong>, leaps down a three-step staircase
+          at <strong>6 m/s</strong>, and traverses stairs, hurdles, stepping stones, gaps, and fallen trees —
+          all with a single policy.
         </h2>
       </div>
 
       <div class="column is-four-fifths is-hidden-tablet has-text-justified-mobile">
         <p>
-          Enabling quadrupedal robots to traverse complex terrains—from rugged outdoor environments to urban
-          landscapes—requires seamless integration of multiple motor skills, smooth transitions between gaits,
-          and high-speed perceptive locomotion using only onboard sensors.
+          Animals fluidly switch between gaits — trotting on rough ground, bounding over obstacles — picking the
+          right skill for the terrain ahead. Robots, so far, have not.
         </p>
         <br>
         <p>
-          We present <strong>APT-RL</strong> (Action Pretrained Transformer-based Reinforcement Learning), a unified
-          framework that enables multi-skill locomotion to achieve high-speed traversal in complex environments through
-          autonomous skill transitions utilizing only onboard perception and computation.
+          <strong>APT-RL</strong> (Action Pretrained Transformer-based Reinforcement Learning) closes this gap.
+          One onboard policy lets a quadruped robot see the terrain coming, choose the right gait and motor skill
+          on its own, and transition between them smoothly — at high speed, with no external sensors or computation.
         </p>
         <br>
         <p>
-          Real-world experiments demonstrate that KAIST HOUND performs agile maneuvers through complex indoor obstacles
-          and outdoor wild environments, reaching instantaneous peak speeds of up to <strong>6 m/s</strong>.
+          The result: KAIST HOUND jumps a 60 cm box at <strong>4.25 m/s</strong>, leaps down a staircase at
+          <strong>6 m/s</strong>, and traverses stairs, hurdles, stepping stones, gaps, and fallen trees —
+          all with a single policy.
         </p>
       </div>
     </div>
@@ -220,28 +219,34 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths">
 
-        <h2 class="title is-1 has-text-centered is-size-4-mobile">APT-RL Pipeline</h2>
+        <h2 class="title is-1 has-text-centered is-size-4-mobile">How APT-RL Works</h2>
         <div class="content">
           <p>
-            Our approach generates large-scale, feature-rich 2D motion datasets through trajectory optimization
-            with simplified dynamics (Single Rigid Body Dynamics). This produces 180,000 trajectories spanning
-            15.5 hours of motion data in just 8 minutes.
+            The core idea: instead of learning everything from scratch with reinforcement learning, first
+            <strong>pretrain a library of locomotion skills</strong> from cheap, physically valid motion data —
+            then let RL learn to <em>use</em> those skills on hard terrain.
+          </p>
+          <p>
+            Trajectory optimization with a simplified 2D robot model generates <strong>180,000 trajectories
+            (15.5 hours of motion) in just 8 minutes</strong> — each one annotated with the joint torques
+            needed to execute it. No animal motion capture, no expensive simulation rollouts.
           </p>
         </div>
 
         <div class="content">
           <p>
-            APT-RL consists of three integrated phases:
+            Training then proceeds in three stages:
           </p>
           <ol>
-            <li><strong>Representation Learning</strong> — A Transformer-based VAE (TVAE) learns a unified latent
-              space from TO-generated trotting and bounding motion data, with gait-specific torque decoders trained
-              via supervised learning.</li>
-            <li><strong>Reinforcement Learning</strong> — A policy learns to select latent actions decoded into
-              joint torques, combined with an auxiliary action for adaptation to complex 3D terrains unseen during
-              pretraining.</li>
-            <li><strong>Perceptual Distillation</strong> — A student encoder trained on depth camera images and 2D
-              LiDAR data mimics a privileged teacher encoder, enabling zero-shot sim-to-real deployment.</li>
+            <li><strong>Learn the skills.</strong> A Transformer-based VAE compresses the trotting and bounding
+              trajectories into a shared latent space, and torque decoders learn to turn any point in that space
+              into motor commands — purely by supervised learning.</li>
+            <li><strong>Learn to use them.</strong> An RL policy picks latent actions (which skill to execute)
+              and adds a small auxiliary correction on top — letting the robot adapt pretrained flat-ground skills
+              to stairs, gaps, and obstacles it has never seen.</li>
+            <li><strong>Learn to see.</strong> A student network learns to reproduce the terrain understanding of a
+              privileged teacher, using only real sensors — a depth camera and 2D LiDAR — so the whole system runs
+              onboard, zero-shot, in the real world.</li>
           </ol>
         </div>
       </div>
@@ -249,9 +254,11 @@
   </div>
 </section>
 
-<video autoplay muted loop playsinline width="100%">
-  <source src="./static/videos/umi-grid-small.mp4" type="video/mp4">
-</video>
+<section class="section is-small">
+  <div class="container is-max-desktop">
+    <img src="./static/images/fig2-pipeline.png" alt="APT-RL training pipeline overview" width="100%" />
+  </div>
+</section>
 
 
 <section class="section is-large" id="results">
@@ -259,16 +266,16 @@
     <div class="columns is-centered">
       <div class="column has-text-justified is-four-fifths  is-hidden-mobile">
         <h2 class="subtitle">
-          Our controller enables KAIST HOUND to autonomously select between trotting and bounding gaits based on
-          terrain geometry, proprioceptive state, and commanded velocity — achieving agile traversal across
-          unstructured outdoor environments.
+          The robot decides for itself when to trot and when to bound — reading the terrain ahead, its own body
+          state, and the commanded speed. Low obstacle? Trot through it. High step at speed? Switch to bounding
+          and jump. No human picks the gait.
         </h2>
       </div>
       <div class="column has-text-justified is-four-fifths is-hidden-tablet">
         <p>
-          Our controller enables KAIST HOUND to autonomously select between trotting and bounding gaits based on
-          terrain geometry, proprioceptive state, and commanded velocity — achieving agile traversal across
-          unstructured outdoor environments.
+          The robot decides for itself when to trot and when to bound — reading the terrain ahead, its own body
+          state, and the commanded speed. Low obstacle? Trot through it. High step at speed? Switch to bounding
+          and jump. No human picks the gait.
         </p>
       </div>
     </div>
@@ -278,28 +285,31 @@
 <section class="section is-small has-background-black has-text-light" id="gait-selection">
   <div class="container is-max-desktop">
 
-    <h2 class="title is-1 has-text-white  is-size-4-mobile">Adaptive Skill Selection in the Wild</h2>
+    <h2 class="title is-1 has-text-white  is-size-4-mobile">Tested in the Wild</h2>
     <div class="content has-text-justified">
       <p>
-        In a 1.1 km urban campus traversal, the robot adapted its gait in response to terrain characteristics
-        and commanded velocity — using trotting at lower speeds and bounding to descend stairs at 4.3 m/s,
-        reaching instantaneous peak speeds of up to 6 m/s.
+        <b>Urban — 1.1 km across a university campus.</b> Multi-level stairs, grass patches, and ramps.
+        The robot trotted down stairs at 1 m/s, bounded down them at 4.3 m/s, and hit a peak of 6 m/s
+        leaping down a three-step staircase.
       </p>
     </div>
 
     <div class="content has-text-justified">
       <p>
-        In a 0.34 km wild forest traversal, the robot autonomously selected between trotting and bounding to
-        navigate fallen trees, exposed roots, uneven logs, and slippery leaf-covered ground using only onboard
-        LiDAR and a depth camera.
+        <b>Wild — 0.34 km of forest trail.</b> Fallen trees, exposed roots, uneven logs, and slippery
+        leaf-covered ground. The robot bounded over elevated logs, switched to trotting on irregular ground,
+        and sped back up when commanded — all decided onboard, in real time.
       </p>
     </div>
   </div>
 </section>
 
-<video autoplay muted loop playsinline height="100%">
-  <source src="./static/videos/sim-small.mp4" type="video/mp4">
-</video>
+<section class="section is-small">
+  <div class="container is-max-desktop">
+    <img src="./static/images/fig1-teaser.jpg"
+      alt="High-speed obstacle traversal and deployment over diverse outdoor terrain" width="100%" />
+  </div>
+</section>
 
 
 
@@ -307,14 +317,14 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-four-fifths is-centered">
-        <h2 class="title is-3 has-text-centered is-size-5-mobile">From 2D Trajectories to 3D Agile Locomotion
+        <h2 class="title is-3 has-text-centered is-size-5-mobile">Beyond the Training Data
         </h2>
 
         <div class="content has-text-justified">
           <p>
-            Our key insight lies in generating large-scale, feature-rich <b>2D motion datasets</b> through trajectory
-            optimization with simplified dynamics (SRBD), while keeping data generation affordable —
-            180,000 trajectories in just 8 minutes.
+            The pretrained skills only cover flat-ground trotting and bounding in 2D. Everything else — jumping,
+            climbing, recovering — emerges from how the policy <b>combines</b> the pretrained skills with its
+            learned auxiliary corrections.
           </p>
         </div>
 
@@ -324,10 +334,9 @@
 
         <div class="content has-text-justified">
           <p>
-            <b>Representation Learning</b>
-            A Transformer-based VAE encodes trotting and bounding motion sequences into a unified latent space.
-            Gait-specific torque decoders are trained via supervised learning, acquiring reusable action priors
-            without any RL-based representation learning or online trajectory optimization.
+            <b>Jumping a log it has never seen.</b>
+            On flat ground, the pretrained decoder torque does most of the work. The moment the jump begins,
+            the auxiliary torque takes over — producing a motion that exists nowhere in the pretraining data.
           </p>
         </div>
 
@@ -336,11 +345,10 @@
         </video>
         <div class="content has-text-justified">
           <p>
-            <b>Auxiliary Action</b>
-            The RL policy jointly learns a latent action (decoded to torques via the pretrained decoder) and an
-            auxiliary action (applied through a PD controller). This enables the policy to generate novel 3D
-            motions beyond the coverage of the 2D pretraining dataset — including dynamic jumping, leg-fracture
-            recovery, and in-place yaw rotation.
+            <b>Surviving a broken leg.</b>
+            When a leg fractures mid-walk — an event never encountered in training — the policy cuts the decoder
+            torque on the affected joint and compensates with auxiliary torque, reshaping the leg trajectory to
+            keep the robot balanced.
           </p>
         </div>
       </div>
@@ -409,7 +417,7 @@
       <div class="publication-authors">
         <p class="is-size-5">
           <a href="https://jgkang1210.github.io" target="_blank">Jun-Gill Kang</a><sup>1,2†</sup>,&nbsp;
-          Jaehyun Park<sup>2†</sup>,<br>
+          <a href="https://scholar.google.com/citations?user=4Ly-WtYAAAAJ&hl=en" target="_blank">Jaehyun Park</a><sup>2†</sup>,<br>
           <a href="https://scholar.google.com/citations?user=uVkqksMAAAAJ&hl=ko" target="_blank">Tae-Gyu Song</a><sup>2</sup>,&nbsp;
           <a href="https://scholar.google.com/citations?user=gD-UbQkAAAAJ&hl=ko" target="_blank">Joon-Ha Kim</a><sup>2,3</sup>,&nbsp;
           <a href="https://seungwoo-hong.github.io/" target="_blank">Seungwoo Hong</a><sup>4,5‡</sup>,&nbsp;
@@ -448,7 +456,8 @@
       <div class="column is-8">
         <div class="content">
           <p>
-            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a>.
+            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a> and <a
+              href="https://umi-on-legs.github.io/">UMI on Legs</a>.
           </p>
           <p>
             This website is licensed under a <a rel="license"

@@ -163,38 +163,38 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified is-hidden-mobile">
         <h2 class="subtitle">
-          Animals fluidly switch between gaits — trotting on rough ground, bounding over obstacles — picking the
-          right skill for the terrain ahead. Robots, so far, have not.
+          Animals fluidly switch between gaits, trotting on rough ground and bounding over obstacles, picking the
+          right skill for the terrain ahead.
         </h2>
         <br>
         <h2 class="subtitle">
           <strong>APT-RL</strong> (Action Pretrained Transformer-based Reinforcement Learning) closes this gap.
           One onboard policy lets a quadruped robot see the terrain coming, choose the right gait and motor skill
-          on its own, and transition between them smoothly — at high speed, with no external sensors or computation.
+          on its own, and transition between them smoothly at high speed, with no external sensors or computation.
         </h2>
         <br>
         <h2 class="subtitle">
           The result: KAIST HOUND jumps a 60 cm box at <strong>4.25 m/s</strong>, leaps down a three-step staircase
-          at <strong>6 m/s</strong>, and traverses stairs, hurdles, stepping stones, gaps, and fallen trees —
+          at <strong>6 m/s</strong>, and traverses stairs, hurdles, stepping stones, gaps, and fallen trees,
           all with a single policy.
         </h2>
       </div>
 
       <div class="column is-four-fifths is-hidden-tablet has-text-justified-mobile">
         <p>
-          Animals fluidly switch between gaits — trotting on rough ground, bounding over obstacles — picking the
+          Animals fluidly switch between gaits, trotting on rough ground and bounding over obstacles, picking the
           right skill for the terrain ahead. Robots, so far, have not.
         </p>
         <br>
         <p>
           <strong>APT-RL</strong> (Action Pretrained Transformer-based Reinforcement Learning) closes this gap.
           One onboard policy lets a quadruped robot see the terrain coming, choose the right gait and motor skill
-          on its own, and transition between them smoothly — at high speed, with no external sensors or computation.
+          on its own, and transition between them smoothly at high speed, with no external sensors or computation.
         </p>
         <br>
         <p>
           The result: KAIST HOUND jumps a 60 cm box at <strong>4.25 m/s</strong>, leaps down a staircase at
-          <strong>6 m/s</strong>, and traverses stairs, hurdles, stepping stones, gaps, and fallen trees —
+          <strong>6 m/s</strong>, and traverses stairs, hurdles, stepping stones, gaps, and fallen trees,
           all with a single policy.
         </p>
       </div>
@@ -223,12 +223,12 @@
         <div class="content">
           <p>
             The core idea: instead of learning everything from scratch with reinforcement learning, first
-            <strong>pretrain a library of locomotion skills</strong> from cheap, physically valid motion data —
+            <strong>pretrain a library of locomotion skills</strong> from cheap, physically valid motion data,
             then let RL learn to <em>use</em> those skills on hard terrain.
           </p>
           <p>
             Trajectory optimization with a simplified 2D robot model generates <strong>180,000 trajectories
-            (15.5 hours of motion) in just 8 minutes</strong> — each one annotated with the joint torques
+            (15.5 hours of motion) in just 8 minutes</strong>, each one annotated with the joint torques
             needed to execute it. No animal motion capture, no expensive simulation rollouts.
           </p>
         </div>
@@ -240,12 +240,12 @@
           <ol>
             <li><strong>Learn the skills.</strong> A Transformer-based VAE compresses the trotting and bounding
               trajectories into a shared latent space, and torque decoders learn to turn any point in that space
-              into motor commands — purely by supervised learning.</li>
+              into motor commands, purely by supervised learning.</li>
             <li><strong>Learn to use them.</strong> An RL policy picks latent actions (which skill to execute)
-              and adds a small auxiliary correction on top — letting the robot adapt pretrained flat-ground skills
+              and adds a small auxiliary correction on top, letting the robot adapt pretrained flat-ground skills
               to stairs, gaps, and obstacles it has never seen.</li>
             <li><strong>Learn to see.</strong> A student network learns to reproduce the terrain understanding of a
-              privileged teacher, using only real sensors — a depth camera and 2D LiDAR — so the whole system runs
+              privileged teacher, using only real sensors (a depth camera and 2D LiDAR), so the whole system runs
               onboard, zero-shot, in the real world.</li>
           </ol>
         </div>
@@ -266,14 +266,14 @@
     <div class="columns is-centered">
       <div class="column has-text-justified is-four-fifths  is-hidden-mobile">
         <h2 class="subtitle">
-          The robot decides for itself when to trot and when to bound — reading the terrain ahead, its own body
+          The robot decides for itself when to trot and when to bound, reading the terrain ahead, its own body
           state, and the commanded speed. Low obstacle? Trot through it. High step at speed? Switch to bounding
           and jump. No human picks the gait.
         </h2>
       </div>
       <div class="column has-text-justified is-four-fifths is-hidden-tablet">
         <p>
-          The robot decides for itself when to trot and when to bound — reading the terrain ahead, its own body
+          The robot decides for itself when to trot and when to bound, reading the terrain ahead, its own body
           state, and the commanded speed. Low obstacle? Trot through it. High step at speed? Switch to bounding
           and jump. No human picks the gait.
         </p>
@@ -288,7 +288,7 @@
     <h2 class="title is-1 has-text-white  is-size-4-mobile">Tested in the Wild</h2>
     <div class="content has-text-justified">
       <p>
-        <b>Urban — 1.1 km across a university campus.</b> Multi-level stairs, grass patches, and ramps.
+        <b>Urban: 1.1 km across a university campus.</b> Multi-level stairs, grass patches, and ramps.
         The robot trotted down stairs at 1 m/s, bounded down them at 4.3 m/s, and hit a peak of 6 m/s
         leaping down a three-step staircase.
       </p>
@@ -296,9 +296,9 @@
 
     <div class="content has-text-justified">
       <p>
-        <b>Wild — 0.34 km of forest trail.</b> Fallen trees, exposed roots, uneven logs, and slippery
+        <b>Wild: 0.34 km of forest trail.</b> Fallen trees, exposed roots, uneven logs, and slippery
         leaf-covered ground. The robot bounded over elevated logs, switched to trotting on irregular ground,
-        and sped back up when commanded — all decided onboard, in real time.
+        and sped back up when commanded, all decided onboard, in real time.
       </p>
     </div>
   </div>
@@ -322,8 +322,8 @@
 
         <div class="content has-text-justified">
           <p>
-            The pretrained skills only cover flat-ground trotting and bounding in 2D. Everything else — jumping,
-            climbing, recovering — emerges from how the policy <b>combines</b> the pretrained skills with its
+            The pretrained skills only cover flat-ground trotting and bounding in 2D. Everything else, from jumping
+            and climbing to recovering, emerges from how the policy <b>combines</b> the pretrained skills with its
             learned auxiliary corrections.
           </p>
         </div>
@@ -336,7 +336,7 @@
           <p>
             <b>Jumping a log it has never seen.</b>
             On flat ground, the pretrained decoder torque does most of the work. The moment the jump begins,
-            the auxiliary torque takes over — producing a motion that exists nowhere in the pretraining data.
+            the auxiliary torque takes over, producing a motion that exists nowhere in the pretraining data.
           </p>
         </div>
 
@@ -346,7 +346,7 @@
         <div class="content has-text-justified">
           <p>
             <b>Surviving a broken leg.</b>
-            When a leg fractures mid-walk — an event never encountered in training — the policy cuts the decoder
+            When a leg fractures mid-walk, an event never encountered in training, the policy cuts the decoder
             torque on the affected joint and compensates with auxiliary torque, reshaping the leg trajectory to
             keep the robot balanced.
           </p>
@@ -382,32 +382,6 @@
     </div>
   </div>
 </section>
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="box pt-6 pb-6">
-      <div class="columns is-max-desktop is-centered ">
-        <div class="column is-four-fifths is-centered">
-          <h2 class="title is-2 has-text-centered is-size-5-mobile">Try APT-RL!</h2>
-          <video autoplay muted loop playsinline width="100%">
-            <source src="./static/videos/failures-small.mp4" type="video/mp4">
-          </video>
-          <div class="content">
-            Code and data for APT-RL are available. The data and figure generation code have been
-            deposited in the Zenodo database.
-          </div>
-          <div class="has-text-centered">
-            <a href="https://github.com/skillquadsr">
-              <button class="button is-primary">View Code</button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 
 <section class="section is-small" id="team">

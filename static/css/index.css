@@ -180,3 +180,19 @@ transition: opacity 1.0s;
   z-index: 2; /* Ensure text is above the overlay */
   transition: opacity 1.0s;
 }
+
+@media screen and (max-width: 768px) {
+  .mobile-hero-video {
+    display: block !important;
+    height: 100%;
+    width: 100%;
+  }
+
+  .mobile-hero-video video {
+    height: 100%;
+    width: 100%;
+    min-height: 0;
+    min-width: 0;
+    object-fit: cover;
+  }
+}

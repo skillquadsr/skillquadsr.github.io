@@ -181,6 +181,14 @@ transition: opacity 1.0s;
   transition: opacity 1.0s;
 }
 
+.deployment-section {
+  padding: 2rem 1.5rem 3rem;
+}
+
+.skill-selection-heading {
+  margin-top: 4rem;
+}
+
 @media screen and (max-width: 768px) {
   .mobile-hero-video {
     display: block !important;

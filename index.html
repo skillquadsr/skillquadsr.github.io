@@ -72,14 +72,6 @@
                 <img src="./static/images/youtube.svg" alt="Youtube" />
               </span>
               <span>Video</span> </a>
-            <span class="navbar-item  pl-4 pr-4">
-              <a href="https://github.com/skillquadsr" class="button is-inverted is-large">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <span>Code</span>
-              </a>
-            </span>
           </div>
         </div>
       </div>
@@ -123,15 +115,6 @@
                 <img src="./static/images/youtube.svg" alt="Youtube" />
               </span>
               <span>Video</span>
-            </a>
-          </span>
-          <span class="link-block">
-            <a href="https://github.com/skillquadsr"
-              class="external-link button is-normal is-rounded is-dark">
-              <span class="icon">
-                <i class="fab fa-github"></i>
-              </span>
-              <span>Code</span>
             </a>
           </span>
         </div>
@@ -198,6 +181,7 @@
         </p>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -205,7 +189,8 @@
 <section class="section" id="video">
   <div class="container is-max-desktop">
     <h2 class="title is-1 has-text-centered is-size-4-mobile">Summary Video</h2>
-    <iframe width="100%" style="aspect-ratio: 16 / 9;" src="https://www.youtube.com/embed/auZIaFG70X0"
+    <iframe width="100%" style="aspect-ratio: 16 / 9;"
+      src="https://www.youtube.com/embed/auZIaFG70X0?origin=https%3A%2F%2Fskillquadsr.github.io"
       title="[Science Robotics Cover] Agile perceptive multiskill locomotion for quadrupedal robots in the wild"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -249,27 +234,121 @@
   </div>
 </section>
 
-<section class="section is-small">
+<section class="section deployment-section" id="results">
   <div class="container is-max-desktop">
-    <img src="./static/images/fig2-pipeline.png" alt="APT-RL training pipeline overview" width="100%" />
-  </div>
-</section>
-
-
-<section class="section is-large" id="results">
-  <div class="container is-max-desktop">
+    <h2 class="title is-1 has-text-centered is-size-4-mobile">Deployment Pipeline</h2>
     <div class="columns is-centered">
-      <div class="column has-text-justified is-four-fifths  is-hidden-mobile">
-        <h2 class="subtitle">
-          The policy selects trotting or bounding according to terrain geometry, proprioceptive state, and commanded
-          velocity. This enables gait and motor-skill transitions without predefined switching rules.
-        </h2>
+      <div class="column is-four-fifths content has-text-justified">
+        <p>
+          APT-RL is deployed on <strong>KAIST HOUND</strong>, an in-house quadruped robot designed for fast and
+          efficient locomotion. The onboard perception system combines an Intel RealSense D435 depth camera with
+          a 2D LiDAR sensor, and all policy and perception computations run onboard.
+        </p>
+        <p>
+          For high-impact locomotion above 4 m/s, a custom 3D-printed vibration absorber is mounted between the
+          robot head and the LiDAR sensor. This mechanism reduces impact loads that can exceed 10 g and otherwise
+          cause unreliable measurements or sensor malfunctions.
+        </p>
       </div>
-      <div class="column has-text-justified is-four-fifths is-hidden-tablet">
+    </div>
+    <video autoplay muted loop playsinline width="100%" style="display: block; margin-bottom: 3rem;">
+      <source src="./static/videos/perception.mp4" type="video/mp4">
+    </video>
+    <div class="columns is-centered">
+      <div class="column content has-text-justified is-four-fifths">
+        <p>
+          The deployed system operates solely with onboard perception and computation, without external motion-capture
+          systems or offboard state estimation. The depth camera and 2D LiDAR provide terrain observations in real time.
+        </p>
         <p>
           The policy selects trotting or bounding according to terrain geometry, proprioceptive state, and commanded
           velocity. This enables gait and motor-skill transitions without predefined switching rules.
         </p>
+      </div>
+    </div>
+
+    <h2 class="title is-2 has-text-centered is-size-4-mobile skill-selection-heading">Skill Selection</h2>
+    <div class="columns is-centered">
+      <div class="column content has-text-justified is-four-fifths">
+        <p>
+          For geometrically similar descending obstacles, the policy changes its gait according to obstacle height.
+          It selects trotting for the lower obstacle and bounding when descending from the higher platform.
+        </p>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <video autoplay muted loop playsinline width="100%" style="display: block;">
+          <source src="./static/videos/same_obs_trot.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-centered">
+          <p><strong>Lower obstacle: trotting selected</strong></p>
+        </div>
+      </div>
+      <div class="column">
+        <video autoplay muted loop playsinline width="100%" style="display: block;">
+          <source src="./static/videos/same_obs_bound.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-centered">
+          <p><strong>Higher platform: bounding selected</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="title is-4 has-text-centered">Terrain-Conditioned Gait Selection</h3>
+    <div class="columns is-centered">
+      <div class="column content has-text-justified is-four-fifths">
+        <p>
+          With the commanded velocity held constant, the policy selects trotting for the lower obstacle and
+          switches to bounding for the higher obstacle. This comparison isolates the effect of terrain geometry
+          on gait selection.
+        </p>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <video autoplay muted loop playsinline width="100%" style="display: block;">
+          <source src="./static/videos/cmd_trot.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-centered">
+          <p><strong>Same command, lower obstacle: trotting</strong></p>
+        </div>
+      </div>
+      <div class="column">
+        <video autoplay muted loop playsinline width="100%" style="display: block;">
+          <source src="./static/videos/cmd_bound.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-centered">
+          <p><strong>Same command, higher obstacle: bounding</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="title is-4 has-text-centered">Command-Conditioned Gait Selection Outdoors</h3>
+    <div class="columns is-centered">
+      <div class="column content has-text-justified is-four-fifths">
+        <p>
+          On the same outdoor staircase, the policy selects different gaits according to commanded velocity.
+          It trots at 1.8 m/s and switches to bounding at 4.3 m/s.
+        </p>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <video autoplay muted loop playsinline width="100%" style="display: block;">
+          <source src="./static/videos/same_obs_trot_outdoor.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-centered">
+          <p><strong>Same staircase, 1.8 m/s: trotting</strong></p>
+        </div>
+      </div>
+      <div class="column">
+        <video autoplay muted loop playsinline width="100%" style="display: block;">
+          <source src="./static/videos/same_obs_bound_outdoor.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-centered">
+          <p><strong>Same staircase, 4.3 m/s: bounding</strong></p>
+        </div>
       </div>
     </div>
   </div>
@@ -287,6 +366,10 @@
       </p>
     </div>
 
+    <video autoplay muted loop playsinline width="100%" style="display: block; margin-bottom: 1.5rem;">
+      <source src="./static/videos/campus.mp4" type="video/mp4">
+    </video>
+
     <div class="content has-text-justified">
       <p>
         <b>Forest environment.</b> The robot completed a 0.34-km route containing fallen trees, exposed roots,
@@ -294,17 +377,12 @@
         trotting in irregular regions, and returned to bounding as the commanded velocity increased.
       </p>
     </div>
+
+    <video autoplay muted loop playsinline width="100%" style="display: block;">
+      <source src="./static/videos/wild.mp4" type="video/mp4">
+    </video>
   </div>
 </section>
-
-<section class="section is-small">
-  <div class="container is-max-desktop">
-    <img src="./static/images/fig1-teaser.jpg"
-      alt="High-speed obstacle traversal and deployment over diverse outdoor terrain" width="100%" />
-  </div>
-</section>
-
-
 
 <section class="section is-small" id="aptrl-details">
   <div class="container is-max-desktop">
@@ -326,51 +404,27 @@
 
         <div class="content has-text-justified">
           <p>
+            <b>2D motion dataset.</b> Pretraining begins with two-dimensional trotting and bounding trajectories
+            generated through trajectory optimization, including the corresponding joint-torque commands.
+          </p>
+        </div>
+
+        <video autoplay muted loop playsinline height="100%">
+          <source src="./static/videos/log_jump.mp4" type="video/mp4">
+        </video>
+
+        <div class="content has-text-justified">
+          <p>
             <b>Log traversal.</b> The pretrained decoder provides most of the joint torque during flat-ground
             locomotion, whereas the contribution of the auxiliary action increases during jump initiation.
           </p>
         </div>
 
-        <video autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/wbc-precision-small.mp4" type="video/mp4">
-        </video>
-        <div class="content has-text-justified">
-          <p>
-            <b>Leg-fracture response.</b> Following a leg fracture during walking, the policy reduces the decoder
-            torque at the affected joint and increases the auxiliary-torque contribution to maintain locomotion.
-          </p>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
-
-
-<section class="section is-small" id="robot">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-1 has-text-centered is-size-4-mobile">KAIST HOUND</h2>
-        <div class="content">
-          <p>
-            We deploy APT-RL on <strong>KAIST HOUND</strong>, an in-house quadruped robot designed for fast and
-            efficient locomotion. The robot is equipped with a D435 depth camera and a 2D LiDAR sensor for
-            onboard perception, running all computation onboard.
-          </p>
-        </div>
-
-        <div class="content">
-          <p>
-            To handle high-impact locomotion at speeds exceeding 4 m/s, we designed custom 3D-printed mechanical
-            vibration absorbers mounted between the robot head and the LiDAR sensor, reducing impact loads that
-            would otherwise exceed 10 g and cause sensor malfunctions.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 <section class="section is-small" id="team">
@@ -402,6 +456,9 @@
       </div>
     </div>
     <br>
+    <video autoplay muted loop playsinline width="100%" style="display: block; margin-bottom: 1.5rem;">
+      <source src="./static/videos/full.mp4" type="video/mp4">
+    </video>
     <pre class="is-hidden-mobile"><code>@article{kang2026aptrl,
   title={Agile perceptive multi-skill locomotion for quadrupedal robots in the wild},
   author={Kang, Jun-Gill and Park, Jaehyun and Song, Tae-Gyu and Kim, Joon-Ha and Hong, Seungwoo and Park, Hae-Won},
